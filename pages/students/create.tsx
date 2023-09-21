@@ -1,3 +1,5 @@
+import { IStudent } from '../../types'
+import api from '../../services/api'
 import { FC } from 'react'
 import Head from 'next/head'
 import { Container, Title } from '../../styles/pages/students/create'
@@ -9,13 +11,17 @@ interface IProps {
 }
 
 const Create: FC<IProps> = ({ name }) => {
+    const { data: students } = api.get<IStudent[]>('/students')
+
     return <>
         <Head>
             <title>Cadastro - Josival Penha</title>
         </Head>
         <Container>
             <Title>Cadastrar aluno</Title>
-            <FormCreateStudent nameDefault={name}/>
+            {students && (
+                <FormCreateStudent nameDefault={name} students={students}/>
+            )}
         </Container>
     </>
 }

@@ -8,7 +8,7 @@ interface IProps {
 
 const Student: FC<IProps> = ({ student }) => {
     return (
-        <Container href={`/students/${student.id}`}>
+        <Container href={`/students/${student._id}`}>
             <Text>{student.name}</Text>
         </Container>
     )

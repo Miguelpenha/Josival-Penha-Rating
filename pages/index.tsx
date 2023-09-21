@@ -1,18 +1,14 @@
+import { useState } from 'react'
+import api from '../services/api'
 import { IStudent } from '../types'
-import { FC, useState } from 'react'
 import Head from 'next/head'
 import { Container, Title, Input } from '../styles/pages'
 import CreateStudent from '../components/CreateStudent'
 import Student from '../components/Student'
-import { GetServerSideProps } from 'next'
-import studentsRaw from '../services/students'
 
-interface IProps {
-    students: IStudent[]
-}
-
-const Home: FC<IProps> = ({ students }) => {
+function Home() {
     const [find, setFind] = useState('')
+    const { data: students } = api.get<IStudent[]>('/students')
 
     return <>
         <Head>
@@ -33,7 +29,7 @@ const Home: FC<IProps> = ({ students }) => {
                 onChange={ev => setFind(ev.target.value)}
             />
             <CreateStudent find={find}/>
-            {students.map((student, index) => {
+            {students && students.map((student, index) => {
                 const isInFind = student.name.toUpperCase().includes(find.toUpperCase())
 
                 if (isInFind) {
@@ -44,12 +40,6 @@ const Home: FC<IProps> = ({ students }) => {
             })}
         </Container>
     </>
-}
-
-export const getServerSideProps: GetServerSideProps<IProps> = async () => {
-    const students = studentsRaw
-
-    return { props: { students } }
 }
 
 export default Home

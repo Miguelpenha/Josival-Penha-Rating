@@ -1,20 +1,22 @@
+import { IStudent } from '../../types'
 import { FC, useState } from 'react'
 import useHandleSubmit from './useHandleSubmit'
 import { Container, Field, Label, Req, Input, Button } from './style'
 
 interface IProps {
+    students: IStudent[]
     nameDefault: string | null
 }
 
-const FormCreateStudent: FC<IProps> = ({ nameDefault }) => {
+const FormCreateStudent: FC<IProps> = ({ nameDefault, students }) => {
     const [name, setName] = useState(nameDefault || '')
-    const handleSubmit = useHandleSubmit(name)
+    const handleSubmit = useHandleSubmit(name, students)
 
     return (
         <Container onSubmit={handleSubmit}>
             <Field>
                 <Label>Nome do aluno <Req>*</Req></Label>
-                <Input placeholder="Nome..." defaultValue={name} onChange={ev => setName(ev.target.value)}/>
+                <Input name="name" placeholder="Nome..." defaultValue={name} onChange={ev => setName(ev.target.value)}/>
             </Field>
             <Button title="Cadastrar">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
