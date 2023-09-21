@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import ButtonRaw from '../../components/Button'
 
 export const Container = styled.main`
     display: flex;
@@ -30,13 +29,13 @@ export const Input = styled.input`
     transition-duration: 0.2s;
     transition-timing-function: linear;
     color: ${props => props.theme.backgroundColor};
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 2px 8px -1px;
     background-color: ${props => props.theme.primary};
-    box-shadow: ${props => props.theme.backgroundColor} 0px 2px 8px -1px;
 
     :focus {
         outline: none;
         border-radius: 5px;
-        box-shadow: ${props => props.theme.backgroundColor} 0px 2px 16px -1px;
+        box-shadow: rgba(0, 0, 0, 0.5) 0px 2px 16px -1px;
     }
 
     ::placeholder {

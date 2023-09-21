@@ -16,7 +16,7 @@ export const Container = styled.button<IContainer>`
     transform: scale(0.95);
     transition-duration: 0.15s;
     transition-timing-function: linear;
-    background-color: ${props => props.theme.primary};
+    background-color: ${props => props.theme.backgroundColor};
 
     ${props => !props.disabled ? css`
         cursor: pointer;
@@ -39,7 +39,7 @@ export const Container = styled.button<IContainer>`
         transition-timing-function: linear;
         width: ${props => props.sizeIcon}em;
         height: ${props => props.sizeIcon}em;
-        fill: ${props => props.theme.backgroundColor};
+        fill: ${props => props.theme.primary};
     }
 `
 
@@ -49,7 +49,7 @@ export const Text = styled.span`
     font-weight: bold;
     transition-duration: 0.2s;
     transition-timing-function: linear;
-    color: ${props => props.theme.backgroundColor};
+    color: ${props => props.theme.primary};
 
     @media screen and (max-width: 900px) {
         font-size: 1.7em;

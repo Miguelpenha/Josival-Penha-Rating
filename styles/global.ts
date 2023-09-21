@@ -28,4 +28,34 @@ export default createGlobalStyle`
         color: ${props => props.theme.primary};
         background-color: ${props => props.theme.backgroundColor};
     }
+
+    .Toastify__toast {
+        color: ${props => props.theme.primary};
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 2.5px 12px 4px;
+        background-color: ${props => props.theme.backgroundColorSecondary};
+    }
+
+    .Toastify__progress-bar {
+        background-color: ${props => props.theme.primary};
+    }
+
+    .Toastify__progress-bar--error {
+        background-color: red;
+    }
+
+    .Toastify__toast-theme--light.Toastify__toast--error {
+        color: red;
+    }
+
+    .Toastify__progress-bar--success {
+        background-color: green;
+    }
+
+    .Toastify__toast-theme--light.Toastify__toast--success {
+        color: green;
+    }
+
+    .Toastify__close-button {
+        color: ${props => props.theme.primary};
+    }
 `

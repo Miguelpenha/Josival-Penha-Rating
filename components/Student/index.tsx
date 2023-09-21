@@ -1,6 +1,6 @@
 import { IStudent } from '../../types'
 import { FC } from 'react'
-import { Container } from './style'
+import { Container, Text } from './style'
 
 interface IProps {
     student: IStudent
@@ -8,7 +8,9 @@ interface IProps {
 
 const Student: FC<IProps> = ({ student }) => {
     return (
-        <Container href={`/student/${student.id}`}>{student.name}</Container>
+        <Container href={`/students/${student.id}`}>
+            <Text>{student.name}</Text>
+        </Container>
     )
 }
 

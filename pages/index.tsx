@@ -1,11 +1,18 @@
-import { useState } from 'react'
-import students from '../services/students'
+import { IStudent } from '../types'
+import { FC, useState } from 'react'
 import Head from 'next/head'
 import { Container, Title, Input } from '../styles/pages'
+import CreateStudent from '../components/CreateStudent'
 import Student from '../components/Student'
+import { GetServerSideProps } from 'next'
+import studentsRaw from '../services/students'
 
-function Home() {
-    const [student, setStudent] = useState('')
+interface IProps {
+    students: IStudent[]
+}
+
+const Home: FC<IProps> = ({ students }) => {
+    const [find, setFind] = useState('')
 
     return <>
         <Head>
@@ -20,20 +27,29 @@ function Home() {
         <Container>
             <Title>Pesquisar aluno</Title>
             <Input
-                name="student"
-                value={student}
+                name="find"
+                value={find}
                 placeholder="Nome do aluno..."
-                onChange={ev => setStudent(ev.target.value)}
+                onChange={ev => setFind(ev.target.value)}
             />
-            {students.map((studentMap, index) => {
-                if (studentMap.name.toUpperCase().includes(student.toUpperCase())) {
+            <CreateStudent find={find}/>
+            {students.map((student, index) => {
+                const isInFind = student.name.toUpperCase().includes(find.toUpperCase())
+
+                if (isInFind) {
                     return (
-                        <Student key={index} student={studentMap}/>
+                        <Student key={index} student={student}/>
                     )
                 }
             })}
         </Container>
     </>
+}
+
+export const getServerSideProps: GetServerSideProps<IProps> = async () => {
+    const students = studentsRaw
+
+    return { props: { students } }
 }
 
 export default Home
