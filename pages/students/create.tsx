@@ -5,6 +5,8 @@ import Head from 'next/head'
 import { Container, Title } from '../../styles/pages/students/create'
 import FormCreateStudent from '../../components/FormCreateStudent'
 import { GetServerSideProps } from 'next'
+import nookies from 'nookies'
+import { jwtVerify } from 'jose'
 
 interface IProps {
     name: string | null
@@ -26,10 +28,30 @@ const Create: FC<IProps> = ({ name }) => {
     </>
 }
 
-export const getServerSideProps: GetServerSideProps<IProps> = async (req) => {
-    const name = req.query.name as unknown as string
+export const getServerSideProps: GetServerSideProps<IProps | object> = async (req) => {
+    const { [process.env.NEXT_PUBLIC_LOGIN_COOKIE_NAME]:isLogged } = nookies.get(req)
 
-    return { props: { name: name || null } }
+    try {
+        if (await jwtVerify(isLogged, new TextEncoder().encode(process.env.SECRET_JWT))) {
+            const name = req.query.name as unknown as string
+
+            return { props: { name: name || null } }
+        } else {
+            return {
+                redirect: {
+                    permanent: false,
+                    destination: '/login'
+                }
+            }
+        }
+    } catch {
+        return {
+            redirect: {
+                permanent: false,
+                destination: '/login'
+            }
+        }
+    }
 }
 
 export default Create
