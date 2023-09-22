@@ -6,6 +6,7 @@ import { Container, Title } from '../../styles/pages/students/student'
 import { GetServerSideProps } from 'next'
 import { jwtVerify } from 'jose'
 import nookies from 'nookies'
+import FormEditStudent from '../../components/FormEditStudent'
 
 interface IProps {
     id: string
@@ -21,6 +22,7 @@ const Student: FC<IProps> = ({ id }) => {
         <Container>
             {student && <>
                 <Title>{student.name}</Title>
+                <FormEditStudent student={student}/>
             </>}
         </Container>
     </>

@@ -1,15 +1,12 @@
 import { useState } from 'react'
-import api from '../services/api'
-import { IStudent } from '../types'
 import Head from 'next/head'
 import { Container, Title, Input } from '../styles/pages'
 import CreateStudent from '../components/CreateStudent'
-import Student from '../components/Student'
 import getServerSidePropsAuth from '../utils/getServerSidePropsAuth'
+import Students from '../components/Students'
 
 function Home() {
     const [find, setFind] = useState('')
-    const { data: students } = api.get<IStudent[]>('/students')
 
     return <>
         <Head>
@@ -20,19 +17,11 @@ function Home() {
             <Input
                 name="find"
                 value={find}
-                placeholder="Nome do aluno..."
+                placeholder="Pesquisar nome do aluno..."
                 onChange={ev => setFind(ev.target.value)}
             />
             <CreateStudent find={find}/>
-            {students && students.map((student, index) => {
-                const isInFind = student.name.toUpperCase().includes(find.toUpperCase())
-
-                if (isInFind) {
-                    return (
-                        <Student key={index} student={student}/>
-                    )
-                }
-            })}
+            <Students find={find}/>
         </Container>
     </>
 }

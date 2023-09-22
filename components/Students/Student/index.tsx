@@ -1,4 +1,4 @@
-import { IStudent } from '../../types'
+import { IStudent } from '../../../types'
 import { FC } from 'react'
 import { Container, Text } from './style'
 

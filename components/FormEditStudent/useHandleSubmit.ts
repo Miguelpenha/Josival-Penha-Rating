@@ -4,7 +4,7 @@ import { FormEvent } from 'react'
 import { toast } from 'react-toastify'
 import apiBase from '../../services/api/base'
 
-function useHandleSubmit(name: string, students: IStudent[]) {
+function useHandleSubmit(name: string, id: string, students: IStudent[]) {
     const router = useRouter()
 
     async function handleSubmit(ev: FormEvent) {
@@ -24,7 +24,8 @@ function useHandleSubmit(name: string, students: IStudent[]) {
                     type: 'success'
                 })
 
-                await apiBase.post('/students/create', {
+                await apiBase.post('/students/edit', {
+                    id,
                     name
                 })
 

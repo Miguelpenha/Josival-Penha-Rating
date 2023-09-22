@@ -3,16 +3,18 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import connectDB from '../../../services/connectDB'
 import studentsModels from '../../../models/student'
 
-type IBody = Omit<IStudent, 'created'>
+interface IBody extends Omit<IStudent, 'created' | '_id'> {
+    id: string
+}
 
 async function editStudent(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'POST') {
         await connectDB()
 
-        const { name, _id } = req.body as IBody
+        const { name, id } = req.body as IBody
 
-        if (name && _id) {
-            await studentsModels.updateOne({ _id }, {
+        if (name && id) {
+            await studentsModels.updateOne({ _id: id }, {
                 name
             } as IStudent)
 
