@@ -10,7 +10,7 @@ function Login() {
 
     return <>
         <Head>
-            <title>Login - Josival Penha</title>
+            <title>Avaliação - Josival Penha</title>
         </Head>
         <Script src="https://accounts.google.com/gsi/client" async defer/>
         <Container>

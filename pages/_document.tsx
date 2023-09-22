@@ -30,12 +30,16 @@ export default class MyDocument extends Document {
         return (
             <Html lang="pt-BR">
                 <Head>
-                    {/* Google Fonts */}
                     <link rel="preconnect" href="https://fonts.googleapis.com"/>
                     <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin=""/>
                     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900" rel="stylesheet"/>
-                    {/* Favicon */}
+                    <meta property="og:title" content="Avaliação - Josival Penha"/>
+                    <meta name="description" content="Avaliação - Josival Penha"/>
+                    <meta name="twitter:card" content="summary_large_image"/>
+                    <meta property="og:description" content="Avaliação - Josival Penha"/>
                     <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon"/>
+                    <meta property="og:url" content="http://rating.josivalpenha.com/"/>
+                    <meta property="og:image" content="http://rating.josivalpenha.com/img/thumbnail.png"/>
                 </Head>
                 <body>
                     <Main/>
