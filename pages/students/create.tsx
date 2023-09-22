@@ -3,6 +3,7 @@ import api from '../../services/api'
 import { FC } from 'react'
 import Head from 'next/head'
 import { Container, Title } from '../../styles/pages/students/create'
+import ButtonBack from '../../components/ButtonBack'
 import FormCreateStudent from '../../components/FormCreateStudent'
 import { GetServerSideProps } from 'next'
 import nookies from 'nookies'
@@ -20,6 +21,7 @@ const Create: FC<IProps> = ({ name }) => {
             <title>Cadastro - Josival Penha</title>
         </Head>
         <Container>
+            <ButtonBack/>
             <Title>Cadastrar aluno</Title>
             {students && (
                 <FormCreateStudent nameDefault={name} students={students}/>

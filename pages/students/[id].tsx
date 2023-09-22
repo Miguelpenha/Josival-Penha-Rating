@@ -3,10 +3,11 @@ import { FC } from 'react'
 import api from '../../services/api'
 import Head from 'next/head'
 import { Container, Title } from '../../styles/pages/students/student'
+import ButtonBack from '../../components/ButtonBack'
+import FormEditStudent from '../../components/FormEditStudent'
 import { GetServerSideProps } from 'next'
 import { jwtVerify } from 'jose'
 import nookies from 'nookies'
-import FormEditStudent from '../../components/FormEditStudent'
 
 interface IProps {
     id: string
@@ -20,6 +21,7 @@ const Student: FC<IProps> = ({ id }) => {
             <title>Aluno - Josival Penha</title>
         </Head>
         <Container>
+            <ButtonBack/>
             {student && <>
                 <Title>{student.name}</Title>
                 <FormEditStudent student={student}/>
