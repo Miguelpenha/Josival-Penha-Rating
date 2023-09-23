@@ -8,8 +8,6 @@ export const Container = styled(Link)`
     padding: 1rem;
     max-width: 25em;
     font-size: 1rem;
-    margin-top: 1em;
-    align-self: center;
     border-radius: 15px;
     text-decoration: none;
     transform: scale(0.95);

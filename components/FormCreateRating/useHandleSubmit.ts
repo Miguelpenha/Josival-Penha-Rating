@@ -12,33 +12,40 @@ function useHandleSubmit(date: string, student: IStudent) {
         ev.preventDefault()
     
         let isExists = false
-        const dateFormatted = DateTime.fromFormat(date.replace(/-/g, ' '), 'yyyy MM dd').setLocale('pt-br').toLocaleString()
+        const dateRaw = DateTime.fromFormat(date.replace(/-/g, ' '), 'yyyy MM dd').setLocale('pt-br')
+        const dateFormatted = dateRaw.toLocaleString()
 
-        student.ratings.map(rating => {
-            if (rating.date === dateFormatted) {
-                isExists = true
-            }
-        })
-
-        if (!isExists) {
-            toast('Avaliação cadastrada', {
-                type: 'success'
-            })
-
-            await apiBase.post('/students/ratings/create', {
-                id: student._id,
-                rating: {
-                    date: dateFormatted,
-                    questions: [{
-                        name: 'asd',
-                        response: '10'
-                    }]
+        if (dateRaw.isValid) {
+            student.ratings.map(rating => {
+                if (rating.date === dateFormatted) {
+                    isExists = true
                 }
             })
-
-            router.push('/')
+    
+            if (!isExists) {
+                toast('Avaliação cadastrada', {
+                    type: 'success'
+                })
+    
+                await apiBase.post('/students/ratings/create', {
+                    id: student._id,
+                    rating: {
+                        date: dateFormatted,
+                        questions: [{
+                            name: 'asd',
+                            response: '10'
+                        }]
+                    }
+                })
+    
+                router.back()
+            } else {
+                toast('Já existe uma avaliação com essa data', {
+                    type: 'error'
+                })
+            }
         } else {
-            toast('Já existe uma avaliação com essa data', {
+            toast('Data inválida', {
                 type: 'error'
             })
         }
