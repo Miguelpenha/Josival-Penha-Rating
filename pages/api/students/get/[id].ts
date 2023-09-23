@@ -11,9 +11,16 @@ async function getStudent(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'GET') {
         await connectDB()
 
-        const { id, fields } = req.query as unknown as IQuery
+        const { id, fields: fieldsRaw } = req.query as unknown as IQuery
+        let fields: string[] = []
 
-        const student = await studentsModels.findById(id).select(fields?.split(',') || [])
+        if (fieldsRaw) {
+            fieldsRaw.split(',').map(fieldRaw => {
+                fields.push(`+${fieldRaw}`)
+            })
+        }
+
+        const student = await studentsModels.findById(id).select(fields)
 
         res.json(student)
     } else {

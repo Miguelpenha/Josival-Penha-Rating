@@ -1,17 +1,19 @@
+import { DateTime } from 'luxon'
+
 const createdSchema = {
     system: {
         type: Date,
-        default: () => new Date()
+        default: () => DateTime.now().setLocale('pt-br').toISO()
     },
     date: {
         type: String,
-        default: () => new Date().toLocaleDateString('pt-br', { timeZone: 'UTC' })
+        default: () => DateTime.now().setLocale('pt-br').toLocaleString()
     },
     hour: {
         type: String,
-        default: () => new Date().toLocaleTimeString('pt-br', {
-            timeZone: 'UTC',
-            timeStyle: 'short'
+        default: () => DateTime.now().setLocale('pt-br').toLocaleString({
+            hour: '2-digit',
+            minute: '2-digit'
         })
     }
 }

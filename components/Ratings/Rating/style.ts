@@ -27,6 +27,7 @@ export const Container = styled(Link)`
 export const Text = styled.span`
     max-width: 100%;
     overflow: hidden;
+    font-weight: bold;
     align-self: center;
     white-space: nowrap;
     text-overflow: ellipsis;

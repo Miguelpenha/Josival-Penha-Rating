@@ -5,6 +5,7 @@ import Head from 'next/head'
 import { Container, Title, ButtonRating } from '../../../styles/pages/students/student'
 import ButtonBack from '../../../components/ButtonBack'
 import FormEditStudent from '../../../components/FormEditStudent'
+import Ratings from '../../../components/Ratings'
 import { GetServerSideProps } from 'next'
 import { jwtVerify } from 'jose'
 import nookies from 'nookies'
@@ -25,12 +26,13 @@ const Student: FC<IProps> = ({ id }) => {
             {student && <>
                 <Title>{student.name}</Title>
                 <FormEditStudent student={student}/>
-                <ButtonRating href={`/students/${student._id}/ratings`}>
+                <ButtonRating href={`/students/${student._id}/ratings/create`}>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
                         <path d="m233-80 65-281L80-550l288-25 112-265 112 265 288 25-218 189 65 281-247-149L233-80Z"/>
                     </svg>
-                    <span>Avaliar</span>
+                    <span>Avaliar aluno</span>
                 </ButtonRating>
+                <Ratings id={student._id}/>
             </>}
         </Container>
     </>
