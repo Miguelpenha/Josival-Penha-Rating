@@ -5,7 +5,7 @@ import { FormEvent } from 'react'
 import { toast } from 'react-toastify'
 import apiBase from '../../services/api/base'
 
-function useHandleSubmit(name: string, students: IStudent[], mutate: KeyedMutator<IStudent>) {
+function useHandleSubmit(name: string, students: IStudent[], mutate: KeyedMutator<IStudent[]>) {
     const router = useRouter()
 
     async function handleSubmit(ev: FormEvent) {

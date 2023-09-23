@@ -7,7 +7,7 @@ import { Container, Field, Label, Req, Input, Button } from './style'
 interface IProps {
     students: IStudent[]
     nameDefault: string | null
-    mutate: KeyedMutator<IStudent>
+    mutate: KeyedMutator<IStudent[]>
 }
 
 const FormCreateStudent: FC<IProps> = ({ nameDefault, students, mutate }) => {
