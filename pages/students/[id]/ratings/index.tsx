@@ -1,19 +1,19 @@
-import { IStudent } from '../../types'
+import { IStudent } from '../../../../types'
 import { FC } from 'react'
-import api from '../../services/api'
+import api from '../../../../services/api'
 import Head from 'next/head'
-import { Container, Title } from '../../styles/pages/students/student'
-import ButtonBack from '../../components/ButtonBack'
-import FormEditStudent from '../../components/FormEditStudent'
+import { Container, Title } from '../../../../styles/pages/students/rating'
+import ButtonBack from '../../../../components/ButtonBack'
 import { GetServerSideProps } from 'next'
 import { jwtVerify } from 'jose'
 import nookies from 'nookies'
+import Ratings from '../../../../components/Ratings'
 
 interface IProps {
     id: string
 }
 
-const Student: FC<IProps> = ({ id }) => {
+const Rating: FC<IProps> = ({ id }) => {
     const { data: student } = api.get<IStudent>(`/students/get/${id}`)
 
     return <>
@@ -24,7 +24,7 @@ const Student: FC<IProps> = ({ id }) => {
             <ButtonBack/>
             {student && <>
                 <Title>{student.name}</Title>
-                <FormEditStudent student={student}/>
+                <Ratings id={student._id}/>
             </>}
         </Container>
     </>
@@ -56,4 +56,4 @@ export const getServerSideProps: GetServerSideProps<IProps | object> = async (re
     }
 }
 
-export default Student
+export default Rating

@@ -4,15 +4,16 @@ import studentsModels from '../../../../models/student'
 
 interface IQuery {
     id: string
+    fields?: string
 }
 
 async function getStudent(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'GET') {
         await connectDB()
 
-        const { id } = req.query as unknown as IQuery
+        const { id, fields } = req.query as unknown as IQuery
 
-        const student = await studentsModels.findById(id)
+        const student = await studentsModels.findById(id).select(fields?.split(',') || [])
 
         res.json(student)
     } else {
