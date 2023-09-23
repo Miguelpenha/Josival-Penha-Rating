@@ -3,19 +3,21 @@ import api from '../../services/api'
 import { IStudent } from '../../types'
 import { Container, Loading } from './style'
 import Rating from './Rating'
+import useSortRatings from '../useSortRatings'
 
 interface IProps {
     id: string
 }
 
 const Ratings: FC<IProps> = ({ id }) => {
-    const { data: student } = api.get<IStudent>(`/students/get/${id}?fields=ratings`)
+    const { data: student, mutate } = api.get<IStudent>(`/students/get/${id}?fields=ratings`)
+    const ratings = useSortRatings(student?.ratings)
 
-    if (student) {
+    if (ratings) {
         return (
             <Container>
-                {student.ratings.map((rating, index) => (
-                    <Rating student={id} key={index} rating={rating}/>
+                {ratings.map((rating, index) => (
+                    <Rating student={id} key={index} rating={rating} mutate={mutate}/>
                 ))}
             </Container>
         )

@@ -14,7 +14,7 @@ interface IProps {
 }
 
 const Create: FC<IProps> = ({ name }) => {
-    const { data: students } = api.get<IStudent[]>('/students')
+    const { data: students, mutate } = api.get<IStudent[]>('/students')
 
     return <>
         <Head>
@@ -24,7 +24,7 @@ const Create: FC<IProps> = ({ name }) => {
             <ButtonBack/>
             <Title>Cadastrar aluno</Title>
             {students && (
-                <FormCreateStudent nameDefault={name} students={students}/>
+                <FormCreateStudent mutate={mutate} nameDefault={name} students={students}/>
             )}
         </Container>
     </>

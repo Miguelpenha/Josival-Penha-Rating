@@ -1,4 +1,5 @@
 import { IStudent } from '../../types'
+import { KeyedMutator } from 'swr'
 import { FC, useState } from 'react'
 import useHandleSubmit from './useHandleSubmit'
 import { Container, Field, Label, Req, Input, Button } from './style'
@@ -6,11 +7,12 @@ import { Container, Field, Label, Req, Input, Button } from './style'
 interface IProps {
     students: IStudent[]
     nameDefault: string | null
+    mutate: KeyedMutator<IStudent>
 }
 
-const FormCreateStudent: FC<IProps> = ({ nameDefault, students }) => {
+const FormCreateStudent: FC<IProps> = ({ nameDefault, students, mutate }) => {
     const [name, setName] = useState(nameDefault || '')
-    const handleSubmit = useHandleSubmit(name, students)
+    const handleSubmit = useHandleSubmit(name, students, mutate)
 
     return (
         <Container onSubmit={handleSubmit}>

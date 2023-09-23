@@ -1,27 +1,33 @@
 import api from '../../services/api'
 import { IStudent } from '../../types'
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import useHandleSubmit from './useHandleSubmit'
 import useHandleDelete from './useHandleDelete'
 import { Container, Field, Label, Req, Input, Buttons, Button, ButtonDelete } from './style'
 import Loading from '../Loading'
+import { useSWRConfig } from 'swr'
 
 interface IProps {
     student: IStudent
 }
 
 const FormEditStudent: FC<IProps> = ({ student }) => {
-    const { data: students } = api.get<IStudent[]>('/students')
+    const { data: students, mutate } = api.get<IStudent[]>('/students')
     const [name, setName] = useState(student.name)
-    const handleSubmit = useHandleSubmit(name, student._id, students as IStudent[])
-    const handleDelete = useHandleDelete(student._id)
+    const { mutate: mutateGlobal } = useSWRConfig()
+    const handleSubmit = useHandleSubmit(name, student._id, students as IStudent[], mutateGlobal)
+    const handleDelete = useHandleDelete(student._id, mutate)
+
+    useEffect(() => {
+        setName(student.name)
+    }, [student])
 
     if (students) {
         return (
             <Container onSubmit={handleSubmit}>
                 <Field>
                     <Label>Nome do aluno <Req>*</Req></Label>
-                    <Input name="name" placeholder="Nome..." defaultValue={name} onChange={ev => setName(ev.target.value)}/>
+                    <Input name="name" placeholder="Nome..." value={name} onChange={ev => setName(ev.target.value)}/>
                 </Field>
                 <Buttons>
                     <Button type="submit" disabled={name.trim().toUpperCase() === student.name.trim().toUpperCase()} title="Salvar">

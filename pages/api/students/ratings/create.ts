@@ -8,14 +8,14 @@ interface IBody {
     rating: IRating
 }
 
-async function createStudent(req: NextApiRequest, res: NextApiResponse) {
+async function createRatingStudent(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'POST') {
         await connectDB()
 
         const { id, rating } = req.body as IBody
 
         if (rating) {
-            const student = await studentsModels.findById(id).select(['+ratings'])
+            const student = await studentsModels.findById(id).select(['ratings'])
 
             student.ratings.push(rating)
 
@@ -30,4 +30,4 @@ async function createStudent(req: NextApiRequest, res: NextApiResponse) {
     }
 }
 
-export default createStudent
+export default createRatingStudent

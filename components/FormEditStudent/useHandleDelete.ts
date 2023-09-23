@@ -1,8 +1,10 @@
+import { KeyedMutator } from 'swr'
+import { IStudent } from '../../types'
 import { useRouter } from 'next/router'
 import { toast } from 'react-toastify'
 import apiBase from '../../services/api/base'
 
-function useHandleDelete(id: string) {
+function useHandleDelete(id: string, mutate: KeyedMutator<IStudent[]>) {
     const router = useRouter()
 
     async function handleDelete() {
@@ -11,6 +13,8 @@ function useHandleDelete(id: string) {
         })
 
         await apiBase.delete(`/students/delete?id=${id}`)
+
+        await mutate()
 
         router.push('/')
     }

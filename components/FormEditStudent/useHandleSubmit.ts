@@ -1,10 +1,11 @@
 import { IStudent } from '../../types'
+import { ScopedMutator } from 'swr/_internal'
 import { useRouter } from 'next/router'
 import { FormEvent } from 'react'
 import { toast } from 'react-toastify'
 import apiBase from '../../services/api/base'
 
-function useHandleSubmit(name: string, id: string, students: IStudent[]) {
+function useHandleSubmit(name: string, id: string, students: IStudent[], mutate: ScopedMutator) {
     const router = useRouter()
 
     async function handleSubmit(ev: FormEvent) {
@@ -20,13 +21,15 @@ function useHandleSubmit(name: string, id: string, students: IStudent[]) {
             })
 
             if (!isExists) {
-                toast('Aluno cadastrado', {
-                    type: 'success'
-                })
-
                 await apiBase.post('/students/edit', {
                     id,
                     name
+                })
+
+                mutate('/students')
+
+                toast('Aluno cadastrado', {
+                    type: 'success'
                 })
 
                 router.push('/')

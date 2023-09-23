@@ -1,10 +1,11 @@
 import { IStudent } from '../../types'
+import { KeyedMutator } from 'swr'
 import { useRouter } from 'next/router'
 import { FormEvent } from 'react'
 import { toast } from 'react-toastify'
 import apiBase from '../../services/api/base'
 
-function useHandleSubmit(name: string, students: IStudent[]) {
+function useHandleSubmit(name: string, students: IStudent[], mutate: KeyedMutator<IStudent>) {
     const router = useRouter()
 
     async function handleSubmit(ev: FormEvent) {
@@ -27,6 +28,8 @@ function useHandleSubmit(name: string, students: IStudent[]) {
                 await apiBase.post('/students/create', {
                     name
                 })
+
+                await mutate()
 
                 router.push('/')
             } else {

@@ -1,6 +1,5 @@
-import { IStudent } from '../../../../types'
 import { FC } from 'react'
-import api from '../../../../services/api'
+import useRating from '../../../../components/useRating'
 import Head from 'next/head'
 import { Container, Title } from '../../../../styles/pages/students/ratings'
 import ButtonBack from '../../../../components/ButtonBack'
@@ -14,7 +13,7 @@ interface IProps {
 }
 
 const Rating: FC<IProps> = ({ id, idRating }) => {
-    const { data: student } = api.get<IStudent>(`/students/get/${id}?fields=ratings`)
+    const rating = useRating(id, idRating)
 
     return <>
         <Head>
@@ -22,9 +21,9 @@ const Rating: FC<IProps> = ({ id, idRating }) => {
         </Head>
         <Container>
             <ButtonBack/>
-            {student && student.ratings.map(rating => (
+            {rating && (
                 <Title>{rating.date}</Title>
-            ))}
+            )}
         </Container>
     </>
 }

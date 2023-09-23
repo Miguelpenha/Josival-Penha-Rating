@@ -31,3 +31,18 @@ export const Text = styled.span`
     text-overflow: ellipsis;
     color: ${props => props.theme.primary};
 `
+
+export const IconDelete = styled.svg`
+    fill: red;
+    width: 2.5em;
+    padding: 0.5em;
+    margin-left: auto;
+    border-radius: 25%;
+    transition-duration: 0.1s;
+    transition-timing-function: linear;
+
+    :hover {
+        border-radius: 50%;
+        background-color: ${props => props.theme.backgroundColorSecondary};
+    }
+`
