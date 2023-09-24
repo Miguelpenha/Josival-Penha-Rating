@@ -5,9 +5,9 @@ export const Container = styled(Link)`
     width: 80%;
     border: none;
     display: flex;
-    padding: 1rem;
+    padding: 0.8em;
+    font-size: 1em;
     max-width: 25em;
-    font-size: 1rem;
     border-radius: 15px;
     text-decoration: none;
     transform: scale(0.95);
