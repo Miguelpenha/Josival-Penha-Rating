@@ -21,9 +21,13 @@ const Rating: FC<IProps> = ({ id, idRating }) => {
         </Head>
         <Container>
             <ButtonBack/>
-            {rating && (
+            {rating && <>
                 <Title>{rating.date}</Title>
-            )}
+                {rating.questions.map(question => <>
+                    <span>{question.name}</span>
+                    <span>{`> ${question.response}`}</span>
+                </>)}
+            </>}
         </Container>
     </>
 }

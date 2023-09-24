@@ -5,8 +5,9 @@ import { FormEvent } from 'react'
 import { toast } from 'react-toastify'
 import apiBase from '../../services/api/base'
 import { DateTime } from 'luxon'
+import IQuestion from '../../types/student/question'
 
-function useHandleSubmit(date: string, student: IStudent, mutate: KeyedMutator<IStudent>) {
+function useHandleSubmit(date: string, student: IStudent, questions: IQuestion[], mutate: KeyedMutator<IStudent>) {
     const router = useRouter()
 
     async function handleSubmit(ev: FormEvent) {
@@ -31,11 +32,8 @@ function useHandleSubmit(date: string, student: IStudent, mutate: KeyedMutator<I
                 await apiBase.post('/students/ratings/create', {
                     id: student._id,
                     rating: {
-                        date: dateFormatted,
-                        questions: [{
-                            name: 'asd',
-                            response: '10'
-                        }]
+                        questions: questions.map(question => ({...question, _id: undefined})),
+                        date: dateFormatted
                     }
                 })
 

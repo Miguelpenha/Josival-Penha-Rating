@@ -1,9 +1,11 @@
 import { FC, useState } from 'react'
 import { IStudent } from '../../types'
 import { DateTime } from 'luxon'
+import api from '../../services/api'
 import useHandleSubmit from './useHandleSubmit'
 import { Container, Field, Label, Req, Input, Button } from './style'
-import api from '../../services/api'
+import Questions from './Questions'
+import IQuestion from '../../types/student/question'
 
 interface IProps {
     id: string
@@ -12,7 +14,8 @@ interface IProps {
 const FormCreateRating: FC<IProps> = ({ id }) => {
     const [date, setDate] = useState(DateTime.now().toISODate() as string)
     const { data: student, mutate } = api.get<IStudent>(`/students/get/${id}?fields=ratings`)
-    const handleSubmit = useHandleSubmit(date, student as IStudent, mutate)
+    const [questions, setQuestions] = useState<IQuestion[]>([])
+    const handleSubmit = useHandleSubmit(date, student as IStudent, questions, mutate)
 
     return (
         <Container onSubmit={handleSubmit}>
@@ -20,6 +23,7 @@ const FormCreateRating: FC<IProps> = ({ id }) => {
                 <Label>Data da avaliação <Req>*</Req></Label>
                 <Input defaultValue={date} name="date" type="date" placeholder="Data..." onChange={ev => setDate(ev.target.value)}/>
             </Field>
+            <Questions questions={questions} setQuestions={setQuestions}/>
             <Button disabled={!Boolean(date)} title="Cadastrar">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
                     <path d="m233-80 65-281L80-550l288-25 112-265 112 265 288 25-218 189 65 281-247-149L233-80Z"/>
