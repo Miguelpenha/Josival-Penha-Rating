@@ -10,12 +10,12 @@ interface IProps {
 const Question: FC<IProps> = ({ question, setQuestions }) => {
     return (
         <Container>
-            <Name value={question.name} onChange={ev => {
-                setQuestions(questions => questions.map(questionMap => question._id===questionMap._id ? {...question, name: ev.target.value.replace(/\n/g, '')} : questionMap))
-            }}/>
-            <Response value={question.response} onChange={ev => {
-                setQuestions(questions => questions.map(questionMap => question._id===questionMap._id ? {...question, response: ev.target.value.replace(/\n/g, '')} : questionMap))
-            }}/>
+            <Name rows={question.name.match(/\n/g) ? question.name.match(/\n/g)!.length+1 : 1} value={question.name} onChange={ev => 
+                setQuestions(questions => questions.map(questionMap => question._id===questionMap._id ? {...question, name: ev.target.value} : questionMap))
+            }/>
+            <Response rows={question.response.match(/\n/g) ? question.response.match(/\n/g)!.length+1 : 1} value={question.response} onChange={ev => 
+                setQuestions(questions => questions.map(questionMap => question._id===questionMap._id ? {...question, response: ev.target.value} : questionMap))
+            }/>
         </Container>
     )
 }

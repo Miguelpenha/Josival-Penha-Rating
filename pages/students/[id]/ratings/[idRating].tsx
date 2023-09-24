@@ -1,11 +1,12 @@
 import { FC } from 'react'
 import useRating from '../../../../components/useRating'
 import Head from 'next/head'
-import { Container, Title, Questions, Question, NameQuestion, Response } from '../../../../styles/pages/students/ratings'
+import { Container, Title } from '../../../../styles/pages/students/ratings'
 import ButtonBack from '../../../../components/ButtonBack'
 import { GetServerSideProps } from 'next'
 import { jwtVerify } from 'jose'
 import nookies from 'nookies'
+import Questions from '../../../../components/Questions'
 
 interface IProps {
     id: string
@@ -23,14 +24,7 @@ const Rating: FC<IProps> = ({ id, idRating }) => {
             <ButtonBack/>
             {rating && <>
                 <Title>{rating.date}</Title>
-                <Questions>
-                    {rating.questions.map((question, index) => (
-                        <Question key={index}>
-                            <NameQuestion>{question.name}</NameQuestion>
-                            <Response>{question.response}</Response>
-                        </Question>
-                    ))}
-                </Questions>
+                <Questions questions={rating.questions}/>
             </>}
         </Container>
     </>

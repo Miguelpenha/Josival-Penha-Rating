@@ -17,24 +17,3 @@ export const Title = styled.h1`
         font-size: 1.5em;
     }
 `
-
-export const Questions = styled.div`
-    gap: 1em;
-    padding: 2em;
-    display: flex;
-    flex-direction: column;
-`
-
-export const Question = styled.div`
-    
-`
-
-export const NameQuestion = styled.h2`
-    padding-left: 0.4em;
-    margin-bottom: 0.2em;
-    border-left: 2px solid ${props => props.theme.primary};
-`
-
-export const Response = styled.span`
-    padding-left: 0.8em;
-`

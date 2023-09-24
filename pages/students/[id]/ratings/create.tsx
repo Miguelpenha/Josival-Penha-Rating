@@ -1,6 +1,4 @@
-import { IStudent } from '../../../../types'
 import { FC } from 'react'
-import api from '../../../../services/api'
 import Head from 'next/head'
 import { Container, Title } from '../../../../styles/pages/students/ratings/create'
 import ButtonBack from '../../../../components/ButtonBack'
