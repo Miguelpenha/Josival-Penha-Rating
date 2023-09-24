@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-    gap: 3em;
+    gap: 1.5em;
     width: 80%;
     padding: 1em;
     display: flex;
