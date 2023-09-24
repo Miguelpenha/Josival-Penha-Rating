@@ -20,13 +20,18 @@ export const Name = styled.textarea`
     font-weight: bold;
     padding-left: 0.5em;
     padding-bottom: 0.5em;
+    transition-duration: 0.15s;
     border-bottom-left-radius: 5px;
+    transition-timing-function: linear;
     color: ${props => props.theme.primary};
     border-left: 2px solid ${props => props.theme.primary};
     border-bottom: 2px solid ${props => props.theme.primary};
 
     :focus {
         outline: none;
+        border-left-width: 3px;
+        border-bottom-width: 3px;
+        border-bottom-left-radius: 10px;
     }
 `
 
@@ -37,10 +42,15 @@ export const Response = styled.textarea`
     padding-top: 1em;
     font-size: 1.2em;
     padding-bottom: 0.5em;
+    transition-duration: 0.15s;
+    transition-timing-function: linear;
     color: ${props => props.theme.secondary};
     border-bottom: 2px solid ${props => props.theme.secondary};
 
     :focus {
         outline: none;
+        border-bottom-left-radius: 2px;
+        border-bottom-right-radius: 2px;
+        border-bottom: 4px solid ${props => props.theme.secondary};
     }
 `

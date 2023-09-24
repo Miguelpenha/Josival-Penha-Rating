@@ -7,6 +7,7 @@ export const Container = styled.form`
     display: flex;
     max-width: 35em;
     align-self: center;
+    margin-bottom: 8em;
     border-radius: 10px;
     flex-direction: column;
     background-color: ${props => props.theme.primary};
