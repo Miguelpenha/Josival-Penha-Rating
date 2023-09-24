@@ -7,6 +7,8 @@ import { GetServerSideProps } from 'next'
 import { jwtVerify } from 'jose'
 import nookies from 'nookies'
 import Questions from '../../../../components/Questions'
+import api from '../../../../services/api'
+import { IStudent } from '../../../../types'
 
 interface IProps {
     id: string
@@ -15,16 +17,17 @@ interface IProps {
 
 const Rating: FC<IProps> = ({ id, idRating }) => {
     const rating = useRating(id, idRating)
+    const { data: student } = api.get<IStudent>(`/students/get/${id}?fields=ratings`)
 
     return <>
         <Head>
-            <title>Aluno - Josival Penha</title>
+            <title>Avaliação - Josival Penha</title>
         </Head>
         <Container>
             <ButtonBack/>
-            {rating && <>
+            {rating && student && <>
                 <Title>{rating.date}</Title>
-                <Questions questions={rating.questions}/>
+                <Questions student={student} rating={rating}/>
             </>}
         </Container>
     </>

@@ -1,26 +1,28 @@
 import IQuestion from '../../../types/student/question'
-import { FC, useState } from 'react'
+import { Dispatch, SetStateAction, FC, useState } from 'react'
 import { Container, Name, Response } from './style'
 
 interface IProps {
     question: IQuestion
+    setQuestions: Dispatch<SetStateAction<IQuestion[]>>
 }
 
-const Question: FC<IProps> = ({ question }) => {
-    const [name, setName] = useState(question.name)
-    const [response, setResponse] = useState(question.response)
-
+const Question: FC<IProps> = ({ question, setQuestions }) => {
     return (
         <Container>
             <Name
-                value={name}
-                onChange={ev => setName(ev.target.value)}
-                rows={name.match(/\n/g) ? name.match(/\n/g)!.length+1 : 1}
+                value={question.name}
+                rows={question.name.match(/\n/g) ? question.name.match(/\n/g)!.length+1 : 1}
+                onChange={ev => (
+                    setQuestions(questions => questions.map(questionMap => question._id===questionMap._id ? {...question, name: ev.target.value} : questionMap))
+                )}
             />
             <Response
-                value={response}
-                onChange={ev => setResponse(ev.target.value)}
-                rows={response.match(/\n/g) ? response.match(/\n/g)!.length+1 : 1}
+                value={question.response}
+                rows={question.response.match(/\n/g) ? question.response.match(/\n/g)!.length+1 : 1}
+                onChange={ev => (
+                    setQuestions(questions => questions.map(questionMap => question._id===questionMap._id ? {...question, response: ev.target.value} : questionMap))
+                )}
             />
         </Container>
     )
