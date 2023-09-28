@@ -15,7 +15,6 @@ export const Container = styled.button`
     background-color: transparent;
     transition-timing-function: linear;
 
-
     :hover {
         border-radius: 50%;
         background-color: ${props => props.theme.backgroundColorSecondary};
