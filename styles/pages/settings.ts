@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import Button from '../../components/Button'
 
 export const Container = styled.main`
     display: flex;
@@ -15,5 +16,13 @@ export const Title = styled.h1`
 
     @media screen and (max-width: 900px) {
         font-size: 1.5em;
+    }
+`
+
+export const ButtonSpreadsheet = styled(Button)`
+    background-color: #00ac47;
+
+    svg, span {
+        color: #FFFFFF;
     }
 `
