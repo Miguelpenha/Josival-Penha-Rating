@@ -34,7 +34,7 @@ export const IconSettings = styled.svg`
 `
 
 export const Title = styled.h1`
-    margin-top: 14vh;
+    margin-top: 16vh;
     font-size: 2.2em;
     align-self: center;
     text-align: center;
