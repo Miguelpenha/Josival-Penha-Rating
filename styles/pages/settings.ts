@@ -19,10 +19,66 @@ export const Title = styled.h1`
     }
 `
 
+export const LoggedAs = styled.div`
+    width: 21rem;
+    display: flex;
+    padding: 1rem;
+    align-self: center;
+    border-radius: 10px;
+    align-items: center;
+    transform: scale(0.95);
+    transition-duration: 0.15s;
+    transition-timing-function: linear;
+    background-color: ${props => props.theme.primary};
+
+    @media screen and (max-width: 400px) {
+        width: 95%;
+        flex-direction: column;
+
+        svg {
+            margin-bottom: 1em;
+        }
+
+        span {
+            word-break: break-all;
+        }
+    }
+
+    svg {
+        width: 2.1em;
+        height: 2.1em;
+        fill: ${props => props.theme.secondaryColor};
+    }
+
+    span {
+        margin: auto;
+        font-size: 1.2em;
+        color: ${props => props.theme.secondaryColor};
+    }
+`
+
 export const ButtonSpreadsheet = styled(Button)`
+    margin-top: 2em;
     background-color: #00ac47;
 
-    svg, span {
-        color: #FFFFFF;
+    svg {
+        fill:${props => props.theme.secondaryColor};
+    }
+
+    span {
+        color: ${props => props.theme.secondaryColor};
+    }
+`
+
+export const ButtonLogout = styled(Button)`
+    margin-top: 3em;
+    background-color: red;
+
+    svg {
+        fill: ${props => props.theme.secondaryColor};
+    }
+
+    span {
+        color: ${props => props.theme.secondaryColor};
     }
 `

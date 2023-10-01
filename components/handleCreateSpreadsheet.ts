@@ -1,7 +1,7 @@
 import apiBase from '../services/api/base'
 
 async function handleCreateSpreadsheet() {
-    const { data } = await apiBase.get('/students/export', {
+    const { data } = await apiBase.get('/students/ratings/export', {
         responseType: 'blob'
     })
 
