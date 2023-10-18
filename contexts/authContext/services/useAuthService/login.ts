@@ -12,6 +12,8 @@ interface IRequest {
 }
 
 async function login(jwt: string, setValue: Dispatch<SetStateAction<boolean>>) {
+    console.log(jwt)
+    /*
     const { valid, token } = (await api.post<IResponse>('/auth/login', {
         jwt
     } as IRequest)).data
@@ -30,6 +32,7 @@ async function login(jwt: string, setValue: Dispatch<SetStateAction<boolean>>) {
     } else {
         return { authenticated: false }
     }
+    */
 }
 
 export default login
