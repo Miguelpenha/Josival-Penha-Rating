@@ -2,6 +2,7 @@ import { FC, useState, useEffect } from 'react'
 import useService from './services'
 import IAuthContext from './type'
 import TypesContext from './Context'
+import login from './login'
 
 interface Iprops {
     children: any
@@ -9,7 +10,7 @@ interface Iprops {
 
 const AuthProvider: FC<Iprops> = ({ children }) => {
     const [isLogged, setIsLogged] = useState(false)
-    const { load, login, logout } = useService(setIsLogged)
+    const { load, logout } = useService(setIsLogged)
 
     useEffect(() => {
         load().then()
@@ -17,7 +18,7 @@ const AuthProvider: FC<Iprops> = ({ children }) => {
 
     const value: IAuthContext = {
         login: async (jwt: string) => {
-            const { authenticated } = await login(jwt)
+            const { authenticated } = await login(jwt, setIsLogged)
 
             return { authenticated }
         },
