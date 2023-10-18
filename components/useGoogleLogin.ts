@@ -12,11 +12,7 @@ function useGoogleLogin() {
             ux_mode: 'redirect',
             client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
             callback: async (res: any) => {
-                console.log('asd')
-                
                 const { authenticated } = await login(res.credential)
-
-                console.log(authenticated)
     
                 if (authenticated) {
                     router.push('/')
