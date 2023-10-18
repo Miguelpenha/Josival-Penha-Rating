@@ -17,9 +17,9 @@ const AuthProvider: FC<Iprops> = ({ children }) => {
 
     const value: IAuthContext = {
         login: async (jwt: string) => {
-            console.log(jwt)
+            const { authenticated } = await login(jwt)
 
-            return { authenticated: false }
+            return { authenticated }
         },
         logout,
         isLogged
