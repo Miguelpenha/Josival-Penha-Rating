@@ -38,8 +38,8 @@ export default class MyDocument extends Document {
                     <meta name="twitter:card" content="summary_large_image"/>
                     <meta property="og:description" content="Avaliação - Josival Penha"/>
                     <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon"/>
-                    <meta property="og:url" content="http://rating.josivalpenha.com/"/>
-                    <meta property="og:image" content="http://rating.josivalpenha.com/img/thumbnail.png"/>
+                    <meta property="og:url" content="https://rating.josivalpenha.com/"/>
+                    <meta property="og:image" content="https://rating.josivalpenha.com/img/thumbnail.png"/>
                 </Head>
                 <body>
                     <Main/>
